@@ -424,7 +424,7 @@ function resolveWords(){
               const sub = run.slice(i,j);
               if(LEXICON.has(sub)){
                 for(let k=start+i; k<start+j; k++){ toClear.add(r+','+k); }
-                score += sub.length; // 1 point/lettre
+                score += sub.length * sub.length; 
               }
             }
           }
