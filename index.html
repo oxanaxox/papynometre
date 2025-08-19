@@ -329,9 +329,9 @@
     }
 
     fetch('mots.txt')
-  .then(r => r.ok ? r.text() : Promise.reject(r.status))
+  .then(r => r.ok ? r.text() : Promise.reject())
   .then(setLexiconFromText)
-  .catch(e => console.error(e));
+  .catch(() => {});
 
 
     // Import manuel par fichier .txt (1 mot par ligne)
