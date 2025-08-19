@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papynomètre – Joyeux anniversaire Papy 🎉</title>
+  <style>
+    :root{
+      --bg:#f5f5f2;           /* fond neutre */
+      --ink:#222;             /* texte principal */
+      --muted:#6b7280;        /* gris */
+      --brand:#2563eb;        /* bleu accent */
+      --accent:#22c55e;       /* vert accent (jauge) */
+      --card:#ffffff;         /* panneaux */
+      --border:#e5e7eb;       /* bordures */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.5;
+    }
+
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,0.8);
+      backdrop-filter: saturate(1.2) blur(6px);
+      border-bottom:1px solid var(--border);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:14px 16px;}
+    .title{display:flex; align-items:center; gap:12px;}
+    .badge{font-size:12px; color:var(--muted)}
+
+    main{max-width:1100px; margin:24px auto; padding:0 16px; display:grid; gap:16px; grid-template-columns: 1.3fr 1fr;}
+    @media (max-width: 930px){ main{grid-template-columns:1fr} }
+
+    .card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px; box-shadow: 0 6px 18px rgba(0,0,0,.05)}
+    .card h2{margin:0 0 8px}
+    .row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .muted{color:var(--muted)}
+
+    /* Bouton tournevis */
+    .tool-btn{
+      --btn-bg:#ffd166; --btn-bg-2:#fca311; --btn-ink:#1f2937;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:999px; border:1px solid #00000010; cursor:pointer; user-select:none;
+      background: linear-gradient(180deg,var(--btn-bg),var(--btn-bg-2));
+      box-shadow: 0 8px 0 #b45309, 0 12px 18px rgba(0,0,0,.15);
+      transform: translateY(0);
+      transition:.15s ease-in-out;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .tool-btn:active{ transform: translateY(3px); box-shadow: 0 5px 0 #b45309, 0 10px 16px rgba(0,0,0,.12); }
+    .tool-btn svg{ width:24px; height:24px }
+
+    /* Canard qui fait coin-coin (remplace la piscine) */
+    .duck-pop{ position:fixed; right:70px; bottom:500px; z-index:100; pointer-events:none; opacity:0; transform: translateY(8px) scale(.96); transition:.25s ease; }
+    .duck-pop.show{ opacity:1; transform: translateY(0) scale(1); }
+    .duck{ font-size:150px; filter: drop-shadow(0 8px 16px rgba(0,0,0,.25)); animation: bob 1.8s ease-in-out infinite; }
+    @keyframes bob{ 50%{ transform: translateY(-6px) } }
+
+    /* Jauge de temps */
+    .gauge{ background:#eef2ff; border:1px solid var(--border); height:16px; border-radius:999px; overflow:hidden; position:relative }
+    .gauge > .bar{ height:100%; width:0%; background: linear-gradient(90deg,#34d399,#22c55e); transition: width .6s ease; }
+    .gauge .tick{ position:absolute; top:0; bottom:0; width:2px; background:#00000010 }
+
+    /* boutons et liens */
+    button, .btn{ background:#111827; color:#fff; border:none; border-radius:12px; padding:10px 12px; cursor:pointer; font-weight:600 }
+    button.ghost{ background:#ffffff; color:#111827; border:1px solid var(--border) }
+    a.btn{ text-decoration:none; display:inline-block }
+
+    /* Zone vidéos */
+    #catVideoContainer iframe{ width:100%; height:260px; border:0; border-radius:12px }
+
+    /* Quiz */
+    .quiz-q{ font-weight:700; margin-bottom:8px }
+    .quiz-choices{ display:grid; gap:8px }
+    .quiz-choices button{ text-align:left }
+
+    /* Mini-jeu Tetris-Scrabble */
+    .game-wrap{ display:grid; grid-template-columns: auto 1fr; gap:16px; align-items:start }
+    .grid{ display:grid; grid-template-columns: repeat(5, 56px); grid-auto-rows:56px; gap:6px; background:#f1f5f9; padding:10px; border-radius:16px; border:1px solid var(--border) }
+    .cell{ display:grid; place-items:center; font-weight:800; font-size:24px; border-radius:12px; background:#ffffff; border:1px solid var(--border); box-shadow: inset 0 -2px #00000010; user-select:none }
+    .cell.empty{ background:#f8fafc; color:#cbd5e1; border-style:dashed }
+    .next{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:12px; }
+    .queue{ display:flex; gap:8px }
+    .queue .tile{ width:40px; height:40px; display:grid; place-items:center; font-weight:900; border-radius:10px; border:1px solid var(--border); background:#fff }
+    .score{ font-weight:700 }
+    .flash{ animation: flash 1.7s ease } @keyframes flash{ 50%{ background:#ff5a5a } }
+    .flashcorrect{ animation: flashcorrect 2s ease } @keyframes flashcorrect{ 50%{ background:#a1f69b } 
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap title">
+      <h1 style="margin:0; font-size:22px"> Papynomètre</h1>
+      <span class="badge">Prototype v2</span>
+      <div style="margin-left:auto" class="row">
+        <button class="tool-btn" id="duckBtn">
+          <span>Joyeux anniversaire !</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="duck-pop" id="duckPop" aria-hidden="true">
+    <div class="duck" aria-label="Canard">🦆</div>
+    <audio id="coinAudio">
+      <!-- <source src="coin.mp3" type="audio/mpeg" /> -->
+    </audio>
+  </div>
+
+  <main>
+    <section class="card">
+      <h2>⏱️ Papynomètre (temps passé ici)</h2>
+      <p class="muted" id="timerLabel">0s passées</p>
+      <div class="gauge" id="gauge">
+        <div class="bar" id="gaugeBar"></div>
+        <!-- repères -->
+        <span class="tick" style="left:25%"></span>
+        <span class="tick" style="left:50%"></span>
+        <span class="tick" style="left:75%"></span>
+      </div>
+      <p class="muted" style="margin-top:6px"></p>
+    </section>
+
+    <section class="card">
+      <h2>🐱 Vidéos de chat</h2>
+      <div class="row">
+        <button class="ghost" data-video="https://www.youtube.com/embed/0Bmhjf0rKe8?si=cat1">Chat #1</button>
+        <button class="ghost" data-video="https://www.youtube.com/embed/j5a0jTc9S10?si=cat2">Chat #2</button>
+        <button class="ghost" data-video="https://www.youtube.com/embed/tntOCGkgt98?si=cat3">Chat #3</button>
+      </div>
+      <div id="catVideoContainer" style="margin-top:10px"></div>
+    </section>
+
+    <section class="card">
+      <h2>🌍 Jeux de géographie</h2>
+      <p class="muted">Quelques pistes pour voyager</p>
+      <div class="row">
+        <a class="btn" href="https://www.geoguessr.com/" target="_blank" rel="noopener">GeoGuessr</a>
+        <a class="btn" href="https://www.geographyquiz.app/" target="_blank" rel="noopener">Geography Quiz</a>
+        <a class="btn" href="https://www.seterra.com/" target="_blank" rel="noopener">Seterra</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>❓ Quiz aléatoires</h2>
+      <div id="quiz">
+        <div class="quiz-q" id="quizQ">Chargement…</div>
+        <div class="quiz-choices" id="quizChoices"></div>
+        <p id="quizFeedback" class="muted"></p>
+        <div class="row" style="margin-top:8px">
+          <button id="nextQ">Question suivante</button>
+          <button id="resetScore" class="ghost">Remise à zéro</button>
+          <span class="muted">Score: <b id="quizScore">0</b></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="grid-column: 1 / -1">
+      <div class="row" style="justify-content:space-between; align-items:center">
+        <h2 style="margin:0">🔤 Mini‑jeu : Tetris‑Scrabble (5×5)</h2>
+        <audio id="jazz" controls loop style="height:34px">
+          <!-- Ajoute ici un petit jazz libre de droit si tu veux (auto‑lecture souvent bloquée) -->
+          <!-- <source src="jazz.mp3" type="audio/mpeg" /> -->
+        </audio>
+      </div>
+
+      <div class="game-wrap">
+        <div class="next">
+          <div class="muted">Prochaines lettres</div>
+          <div class="queue" id="queue"></div>
+          <p class="score">Score : <span id="score">0</span></p>
+          <div class="row" style="margin-top:6px">
+            <button id="newGame" class="ghost">Nouvelle partie</button>
+          </div>
+          <div class="row" style="margin-top:10px">
+            <input type="file" id="lexFile" accept=".txt">
+            <span class="muted" id="lexInfo">Lexique : intégré (petit). Tu peux charger un fichier texte (un mot par ligne), ou placer <code>mots.txt</code> à côté du HTML.</span>
+          </div>
+        </div>
+        <div>
+          <div class="grid" id="grid" aria-label="Grille 5 par 5 (clique une colonne pour faire tomber la lettre)"></div>
+          <p class="muted">Astuce : clique directement **dans la colonne** voulue. Forme des mots horizontaux ou verticaux (≥ 2 lettres). Les lettres du mot disparaissent et le reste tombe par gravité.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap" style="margin-bottom:40px; color:#6b7280">
+    Fait avec ❤️ pour Papy. – v2 (HTML/CSS/JS)
+  </footer>
+
+  <script>
+    /* -----------------------------
+       0) OUTILS UTILES
+    ------------------------------*/
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    const stripAccents = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    /* -----------------------------
+       1) BOUTON TOURNEVIS → CANARD "COIN COIN"
+    ------------------------------*/
+    const duckBtn = document.getElementById('duckBtn');
+    const duckPop = document.getElementById('duckPop');
+    const coinAudio = document.getElementById('coinAudio');
+    duckBtn.addEventListener('click', ()=>{
+      duckPop.classList.add('show');
+      try { coinAudio.currentTime = 0; coinAudio.play(); } catch(e){}
+      setTimeout(()=>{ duckPop.classList.remove('show'); try{ coinAudio.pause(); }catch(e){} }, 2500);
+    });
+
+    /* -----------------------------
+       2) JAUGE DE TEMPS (30 min → 100%)
+    ------------------------------*/
+    const gaugeBar = document.getElementById('gaugeBar');
+    const timerLabel = document.getElementById('timerLabel');
+    const FILL_SECONDS = 30 * 60; // 30 minutes
+    const start = Date.now();
+    setInterval(()=>{
+      const elapsed = Math.floor((Date.now()-start)/1000);
+      const pct = Math.min(100, (elapsed / FILL_SECONDS) * 100);
+      gaugeBar.style.width = pct.toFixed(2) + '%';
+      timerLabel.textContent = elapsed + 's passées';
+    }, 500);
+
+    /* -----------------------------
+       3) VIDEOS DE CHAT – boutons
+    ------------------------------*/
+    const catVideoContainer = document.getElementById('catVideoContainer');
+    document.querySelectorAll('[data-video]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const url = btn.getAttribute('data-video');
+        catVideoContainer.innerHTML = `<iframe src="${url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      });
+    });
+
+    /* -----------------------------
+       4) QUIZ – JSON local (exemples)
+    ------------------------------*/
+    const QUESTIONS = [
+      { q:"Combien d'espèces de tortues marines existent ?", choices:["3","5","7","12"], a:2 },
+      { q:"L'année de la prise de la Bastille ?", choices:["1789","1792","1776","1804"], a:0 },
+      { q:"Le mot ‘OX’ est-il valide au Scrabble (FR) ?", choices:["Oui","Non"], a:1 },
+      { q:"Quelle est la capitale de la Suisse ?", choices:["Zurich","Genève","Berne","Bâle"], a:2 },
+      { q:"Une tortue est un…", choices:["Amphibien","Reptile","Mammifère","Poisson"], a:1 },
+      { q:"Dans ‘Des chiffres et des lettres’, la partie lettres vise à…", choices:["Former le plus long mot","Deviner un nombre secret","Trouver des rimes"], a:0 },
+    ];
+    let quizIndex = -1, quizScore = 0;
+    const quizQ = document.getElementById('quizQ');
+    const quizChoices = document.getElementById('quizChoices');
+    const quizFeedback = document.getElementById('quizFeedback');
+    const quizScoreEl = document.getElementById('quizScore');
+
+    function drawQuestion(){
+      quizIndex = Math.floor(Math.random()*QUESTIONS.length);
+      const item = QUESTIONS[quizIndex];
+      quizQ.textContent = item.q;
+      quizChoices.innerHTML = '';
+      quizFeedback.textContent = '';
+      item.choices.forEach((c, i)=>{
+        const b = document.createElement('button');
+        b.textContent = c;
+        b.addEventListener('click', ()=>{
+          if(i === item.a){ quizFeedback.textContent = '✅ Bravo !'; quizScore++; }
+          else { quizFeedback.textContent = '❌ Raté. Bonne réponse : ' + item.choices[item.a]; }
+          quizScoreEl.textContent = String(quizScore);
+        });
+        quizChoices.appendChild(b);
+      });
+    }
+    document.getElementById('nextQ').addEventListener('click', drawQuestion);
+    document.getElementById('resetScore').addEventListener('click', ()=>{ quizScore=0; quizScoreEl.textContent='0'; });
+    drawQuestion();
+
+    /* -----------------------------
+       5) MINI‑JEU TETRIS‑SCRABBLE (5×5)
+       – Clique une colonne : la lettre en tête de file y tombe.
+       – Lexique : intégré par défaut, chargeable via fichier texte.
+    ------------------------------*/
+    const gridEl = document.getElementById('grid');
+    const queueEl = document.getElementById('queue');
+    const scoreEl = document.getElementById('score');
+    const newGameBtn = document.getElementById('newGame');
+    const lexFile = document.getElementById('lexFile');
+    const lexInfo = document.getElementById('lexInfo');
+
+    const ROWS = 5, COLS = 5;
+    let grid = []; // [ROWS][COLS] with letters or null
+    let score = 0;
+
+    // Distribution des lettres (Scrabble FR, approximatif)
+    const LETTERS = [
+      ['A',9],['B',2],['C',2],['D',3],['E',15],['F',2],['G',2],['H',2],
+      ['I',8],['J',1],['K',1],['L',5],['M',3],['N',6],['O',6],['P',2],
+      ['Q',1],['R',6],['S',6],['T',6],['U',6],['V',2],['W',1],['X',1],['Y',1],['Z',1]
+    ];
+    const bag = [];
+    LETTERS.forEach(([ch, n])=>{ for(let i=0;i<n;i++) bag.push(ch); });
+    function randomLetter(){ return bag[Math.floor(Math.random()*bag.length)]; }
+
+    // --- Lexique (dictionnaire de mots) ---
+    // Lexique intégré minimal (démo)
+    let LEXICON = new Set([
+      'LE','LA','LES','UN','UNE','ET','EST','SUR','TES','SEL','LOT','ROI','LIT','MER','RUE','NE','RE','SU','FEU',
+      'CHAT','TORTUE','PARIS','LION','SAS','SALON','LUNE','SOLEIL','MERE','PERE','TETE'
+    ]);
+    const updateLexInfo = () => { lexInfo.textContent = `Lexique : ${LEXICON.size} mot(s) chargé(s).`; };
+    updateLexInfo();
+
+    function setLexiconFromText(text){
+      const lines = text.split(/\r?\n/);
+      const words = [];
+      for(const raw of lines){
+        let up = stripAccents(String(raw).trim().toUpperCase());
+        up = up.replace(/[^A-Z]/g,''); // garde seulement A-Z
+        if(up.length>=2 && up.length<=12) words.push(up);
+      }
+      LEXICON = new Set(words);
+      updateLexInfo();
+    }
+
+    // Tente de charger automatiquement mots.txt s'il est présent à côté du HTML
+    fetch('mots.txt').then(r=> r.ok ? r.text() : Promise.reject()).then(setLexiconFromText).catch(()=>{});
+
+    // Import manuel par fichier .txt (1 mot par ligne)
+    lexFile.addEventListener('change', (e)=>{
+      const f = e.target.files && e.target.files[0];
+      if(!f) return;
+      const reader = new FileReader();
+      reader.onload = () => setLexiconFromText(String(reader.result||''));
+      reader.readAsText(f);
+    });
+
+    // File d'attente
+    let queue = [];
+    function refillQueue(){ while(queue.length<5) queue.push(randomLetter()); drawQueue(); }
+    function drawQueue(){
+      queueEl.innerHTML = '';
+      queue.forEach((ch, i)=>{
+        const d = document.createElement('div'); d.className='tile'; d.textContent = ch; if(i===0) d.style.outline='2px solid #94a3b8';
+        queueEl.appendChild(d);
+      });
+    }
+
+    function newGame(){
+      grid = Array.from({length:ROWS}, ()=> Array.from({length:COLS}, ()=> null));
+      score = 0; scoreEl.textContent = '0';
+      queue = []; refillQueue();
+      drawGrid();
+    }
+
+    function drawGrid(){
+      gridEl.innerHTML = '';
+      for(let r=0;r<ROWS;r++){
+        for(let c=0;c<COLS;c++){
+          const cell = document.createElement('div');
+          cell.className = 'cell' + (grid[r][c] ? '' : ' empty');
+          cell.textContent = grid[r][c] || '·';
+          cell.dataset.row = String(r);
+          cell.dataset.col = String(c);
+          gridEl.appendChild(cell);
+        }
+      }
+    }
+
+    // Clique sur une cellule → on récupère sa colonne
+    gridEl.addEventListener('click', (e)=>{
+      const cell = e.target.closest('.cell');
+      if(!cell) return;
+      const col = Number(cell.dataset.col);
+      dropInColumn(col);
+    });
+
+    function lowestEmptyRow(col){
+      for(let r=ROWS-1; r>=0; r--){ if(!grid[r][col]) return r; }
+      return -1; // colonne pleine
+    }
+
+    function dropInColumn(col){
+      const r = lowestEmptyRow(col);
+      if(r===-1){
+        // petit flash visuel sur la colonne pleine
+        // on ajoute/remet la classe flash sur toutes les cases de la colonne
+        for(let rr=0; rr<ROWS; rr++){
+          const idx = rr*COLS + col;
+          const cell = gridEl.children[idx];
+          if(cell){ cell.classList.remove('flash'); void cell.offsetWidth; cell.classList.add('flash'); }
+        }
+        return;
+      }
+      const letter = queue.shift(); refillQueue();
+      grid[r][col] = letter;
+      drawGrid();
+      resolveWords();
+    }
+
+    // Recherche de mots horizontaux et verticaux (>=2)
+function resolveWords(){
+  const toClear = new Set();
+
+  // --- Vérification lignes ---
+  for(let r=0;r<ROWS;r++){
+    let run = '';
+    let start = 0;
+    for(let c=0;c<=COLS;c++){
+      const ch = (c<COLS)? grid[r][c] : null;
+      if(ch){ if(run==='') start=c; run+=ch; }
+      if(!ch || c===COLS){ // segment terminé
+        if(run.length>=2){
+          for(let i=0;i<run.length;i++){
+            for(let j=i+2;j<=run.length;j++){
+              const sub = run.slice(i,j);
+              if(LEXICON.has(sub)){
+                for(let k=start+i; k<start+j; k++){ toClear.add(r+','+k); }
+                score += sub.length; // 1 point/lettre
+              }
+            }
+          }
+        }
+        run='';
+      }
+    }
+  }
+
+  // --- Vérification colonnes ---
+  for(let c=0;c<COLS;c++){
+    let run=''; let start=0;
+    for(let r=0;r<=ROWS;r++){
+      const ch = (r<ROWS)? grid[r][c] : null;
+      if(ch){ if(run==='') start=r; run+=ch; }
+      if(!ch || r===ROWS){
+        if(run.length>=2){
+          for(let i=0;i<run.length;i++){
+            for(let j=i+2;j<=run.length;j++){
+              const sub = run.slice(i,j);
+              if(LEXICON.has(sub)){
+                for(let k=start+i; k<start+j; k++){ toClear.add(k+','+c); }
+                score += sub.length;
+              }
+            }
+          }
+        }
+        run='';
+      }
+    }
+  }
+
+  // --- Si des mots sont trouvés ---
+  if(toClear.size>0){
+
+    // 1. Mettre en surbrillance les cases trouvées
+    toClear.forEach(key=>{
+      const [r,c]=key.split(',').map(Number);
+      const idx = r*COLS + c;
+      const cell = gridEl.children[idx];
+      if(cell){
+        cell.classList.add("flashcorrect"); 
+      }
+    });
+
+    // 2. Attendre la fin de l'animation avant suppression et gravité
+    setTimeout(()=>{
+      // supprimer
+      toClear.forEach(key=>{
+        const [r,c]=key.split(',').map(Number);
+        grid[r][c]=null;
+      });
+
+      // gravité
+      for(let c=0;c<COLS;c++){
+        let write = ROWS-1;
+        for(let r=ROWS-1;r>=0;r--){
+          if(grid[r][c]){
+            grid[write][c]=grid[r][c];
+            if(write!==r) grid[r][c]=null;
+            write--;
+          }
+        }
+      }
+
+      scoreEl.textContent = String(score);
+      drawGrid();
+
+      // re-vérifier pour des chaines
+      setTimeout(resolveWords, 60);
+    }, 2000);
+  }
+}
+
+
+    newGameBtn.addEventListener('click', newGame);
+    newGame();
+  </script>
+</body>
+</html>
