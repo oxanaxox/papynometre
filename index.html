@@ -309,7 +309,8 @@
     // --- Lexique (dictionnaire de mots) ---
     // Lexique intégré minimal (démo)
     let LEXICON = new Set([
-      'LE','LA','LES','UN','UNE','ET','EST','SUR','TES','SEL','LOT','ROI','LIT','MER','RUE','NE','RE','SU','FEU',
+      'LE','LA','EU','ME','MES','SES','SI','SON','SA','LES','UN','UNE','ET','EST','SUR',
+      'TES','SEL','LOT','ROI','LIT','MER','RUE','NE','RE','SU','FEU','LIEU','TARTE','CAFE',
       'CHAT','TORTUE','PARIS','LION','SAS','SALON','LUNE','SOLEIL','MERE','PERE','TETE'
     ]);
     const updateLexInfo = () => { lexInfo.textContent = `Lexique : ${LEXICON.size} mot(s) chargé(s).`; };
@@ -327,7 +328,7 @@
       updateLexInfo();
     }
 
-    fetch('https://https://oxanaxox.github.io/papynometre/mots.txt')
+    fetch('mots.txt')
   .then(r => r.ok ? r.text() : Promise.reject(r.status))
   .then(setLexiconFromText)
   .catch(e => console.error(e));
