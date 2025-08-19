@@ -289,7 +289,7 @@
     const queueEl = document.getElementById('queue');
     const scoreEl = document.getElementById('score');
     const newGameBtn = document.getElementById('newGame');
-    const lexFile = document.getElementById('lexFile');
+    //const lexFile = document.getElementById('lexFile');
     const lexInfo = document.getElementById('lexInfo');
 
     const ROWS = 5, COLS = 5;
@@ -334,13 +334,13 @@
 
 
     // Import manuel par fichier .txt (1 mot par ligne)
-    lexFile.addEventListener('change', (e)=>{
-      const f = e.target.files && e.target.files[0];
-      if(!f) return;
-      const reader = new FileReader();
-      reader.onload = () => setLexiconFromText(String(reader.result||''));
-      reader.readAsText(f);
-    });
+    //lexFile.addEventListener('change', (e)=>{
+      //const f = e.target.files && e.target.files[0];
+    //  if(!f) return;
+    //  const reader = new FileReader();
+    //  reader.onload = () => setLexiconFromText(String(reader.result||''));
+    //  reader.readAsText(f);
+    //});
 
     // File d'attente
     let queue = [];
