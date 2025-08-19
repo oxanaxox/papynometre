@@ -327,8 +327,11 @@
       updateLexInfo();
     }
 
-    // Tente de charger automatiquement mots.txt s'il est présent à côté du HTML
-    fetch('mots.txt').then(r=> r.ok ? r.text() : Promise.reject()).then(setLexiconFromText).catch(()=>{});
+    fetch('https://TONPSEUDO.github.io/TONREPO/mots.txt')
+  .then(r => r.ok ? r.text() : Promise.reject(r.status))
+  .then(setLexiconFromText)
+  .catch(e => console.error(e));
+
 
     // Import manuel par fichier .txt (1 mot par ligne)
     lexFile.addEventListener('change', (e)=>{
