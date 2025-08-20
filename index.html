@@ -6,11 +6,11 @@
   <title>Papynomètre – Joyeux anniversaire Papy 🎉</title>
   <style>
     :root{
-      --ink:#643a36;              
+      --ink:#643a36;            
       --muted:#c34aff;       
       --brand:#2563eb;        
       --accent:#ff7eee;      
-      --card:#fbebff;         
+      --card:#a8fadf;         
       --border:#7b4949;  
     }
 
@@ -29,7 +29,7 @@
 
     header{
       position:sticky; top:0; z-index:50;
-      background:rgba(255,255,255,0.8);
+      background:rgba(189, 242, 255, 0.8);
       backdrop-filter: saturate(1.2) blur(6px);
       border-bottom:1px solid var(--border);
     }
@@ -50,17 +50,17 @@
     /* Canard qui fait coin-coin (remplace la piscine) */
     .duck-pop{ position:fixed; right:70px; bottom:500px; z-index:100; pointer-events:none; opacity:0; transform: translateY(8px) scale(.96); transition:.25s ease; }
     .duck-pop.show{ opacity:1; transform: translateY(0) scale(1); }
-    .duck{ font-size:150px; filter: drop-shadow(0 8px 16px rgba(0,0,0,.25)); animation: bob 1.8s ease-in-out infinite; }
+    .duck{ font-size:150px; filter: drop-shadow(0 8px 16px rgba(255, 187, 253, 0.865)); animation: bob 1.8s ease-in-out infinite; }
     @keyframes bob{ 50%{ transform: translateY(-6px) } }
 
     /* Jauge de temps */
     .gauge{ background:#eef2ff; border:1px solid var(--border); height:16px; border-radius:999px; overflow:hidden; position:relative }
-    .gauge > .bar{ height:100%; width:0%; background: linear-gradient(90deg,#34d399,#22c55e); transition: width .6s ease; }
+    .gauge > .bar{ height:100%; width:0%; background: linear-gradient(90deg,#34d399,#19b221c3); transition: width .6s ease; }
     .gauge .tick{ position:absolute; top:0; bottom:0; width:2px; background:#00000010 }
 
     /* boutons et liens */
-    button, .btn{ background:#111827; color:#fff; border:none; border-radius:12px; padding:10px 12px; cursor:pointer; font-weight:600 }
-    button.ghost{ background:#ffffff; color:#111827; border:1px solid var(--border) }
+    button, .btn{ background:#905555; color:#9ce0ff; border:none; border-radius:12px; padding:10px 12px; cursor:pointer; font-weight:600 }
+    button.ghost{ background:#9ce0ff; color:#905555; border:1px solid var(--border) }
     a.btn{ text-decoration:none; display:inline-block }
 
     /* Zone vidéos */
