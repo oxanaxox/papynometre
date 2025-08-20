@@ -6,13 +6,13 @@
   <title>Papynomètre – Joyeux anniversaire Papy 🎉</title>
   <style>
     :root{
-      --bg:#f5f5f2;           /* fond neutre */
-      --ink:#222;             /* texte principal */
-      --muted:#6b7280;        /* gris */
-      --brand:#2563eb;        /* bleu accent */
-      --accent:#22c55e;       /* vert accent (jauge) */
-      --card:#ffffff;         /* panneaux */
-      --border:#e5e7eb;       /* bordures */
+      --bg:#f5caff;           
+      --ink:#a2daff;             
+      --muted:#c34aff;       
+      --brand:#2563eb;        
+      --accent:#ff7eee;      
+      --card:#94f18e;         
+      --border:#7b4949;  
     }
 
     *{box-sizing:border-box}
@@ -71,7 +71,7 @@
 
     /* Mini-jeu Tetris-Scrabble */
     .game-wrap{ display:grid; grid-template-columns: auto 1fr; gap:16px; align-items:start }
-    .grid{ display:grid; grid-template-columns: repeat(5, 56px); grid-auto-rows:56px; gap:6px; background:#f1f5f9; padding:10px; border-radius:16px; border:1px solid var(--border);width: fit-content; max-width: 100%; }
+    .grid{ display:grid; grid-template-columns: repeat(5, 56px); grid-auto-rows:56px; gap:6px; background:#f1f5f9; padding:10px; border-radius:16px; border:1px solid var(--border);width: fit-content; max-width: 100%; margin-right: auto; }
     .cell{ display:grid; place-items:center; font-weight:800; font-size:24px; border-radius:12px; background:#ffffff; border:1px solid var(--border); box-shadow: inset 0 -2px #00000010; user-select:none }
     .cell.empty{ background:#f8fafc; color:#cbd5e1; border-style:dashed }
     .next{ background:#fff; border:1px solid var(--border); border-radius:16px; padding:12px; }
