@@ -10,7 +10,7 @@
       --muted:#c34aff;       
       --brand:#2563eb;        
       --accent:#ff7eee;      
-      --card:#e7cff9;         
+      --card:#eedcfd;         
       --border:#7b4949;  
     }
 
@@ -73,7 +73,7 @@
 
     /* Mini-jeu Tetris-Scrabble */
     .game-wrap{ display:grid; grid-template-columns: auto 1fr; gap:16px; align-items:start; min-width: 0; }
-    .next { min-width: 0; }
+  
     .grid{ display:grid; grid-template-columns: repeat(5, 56px); grid-auto-rows:56px; gap:6px; background:#f1f5f9; padding:10px; border-radius:16px; border:1px solid var(--border);width: fit-content; max-width: 100%; margin-right: auto; }
     .cell{ display:grid; place-items:center; font-weight:800; font-size:24px; border-radius:12px; background:#ffffff; border:1px solid var(--border); box-shadow: inset 0 -2px #00000010; user-select:none }
     .cell.empty{ background:#f8fafc; color:#cbd5e1; border-style:dashed }
@@ -246,12 +246,13 @@ document.querySelectorAll('[data-video]').forEach(btn => {
     ------------------------------*/
     const QUESTIONS = [
       { q:"Combien d'espèces de tortues marines existent ?", choices:["3","5","7","12"], a:2 },
-      { q:"L'année de l'invention du photomation", choices:["1925","1956","1955","1804"], a:0 },
+      { q:"L'année de l'invention du photomaton", choices:["1925","1956","1955","1804"], a:0 },
       { q:"Le mot ‘OX’ est-il valide au Scrabble (FR) ?", choices:["Oui","Non"], a:1 },
-      { q:"De quoi a-t-on peur d’être séparé lorsque l’on est nomophobe ?", choices:["Son nom","son téléphone portable","Ses poissons","Ses habitudes"], a:2 },
+      { q:"De quoi a-t-on peur d’être séparé lorsque l’on est nomophobe ?", choices:["Son nom","son téléphone portable","Ses poissons","Ses habitudes"], a:1 },
       { q:"Une tortue est un…", choices:["Amphibien","Reptile","Mammifère","Poisson"], a:1 },
       { q:"Dans ‘Des chiffres et des lettres’, la partie lettres vise à…", choices:["Former le plus long mot","Deviner un nombre secret","Trouver des rimes"], a:0 },
-      { q:"L'année de l'invention du photomation", choices:["1925","1956","1955","1804"], a:0 },
+      { q:"Quel est le plat préféré de Nany ?", choices:["Le Homard grillé","Le pot-au-feu","ça dépend du lieu où elle est",], a:2 },
+      { q:"Une tortue est un…", choices:["Amphibien","Reptile","Mammifère","Poisson"], a:1 },
     ];
     let quizIndex = -1, quizScore = 0;
     const quizQ = document.getElementById('quizQ');
