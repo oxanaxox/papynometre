@@ -180,14 +180,14 @@
           
         <div>
           <div class="grid" id="grid" aria-label="Grille 5 par 5 (clique une colonne pour faire tomber la lettre)"></div>
-          <p class="muted"> Le but du jeu est de faire des mots, les lettres arrivent par la gauche. Il suffit de cliquer sur une colonne pour qu'une lettre tombe dedans ! Bisous</p>
+          <p class="muted"> Le but du jeu est de faire des mots, les lettres arrivent par la gauche. Il suffit de cliquer sur une colonne pour qu'une lettre tombe dedans! Bisous</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="wrap" style="margin-bottom:40px; color:#6b7280">
-    Fait en Août 2
+    Fait pour l'anniversaire de papy joyeux anniv papy
   </footer>
 
   <script>
@@ -271,7 +271,7 @@ document.querySelectorAll('[data-video]').forEach(btn => {
         b.textContent = c;
         b.addEventListener('click', ()=>{
           if(i === item.a){ quizFeedback.textContent = '✅ Bravo !'; quizScore++; }
-          else { quizFeedback.textContent = '❌ Raté. Bonne réponse : ' + item.choices[item.a]; }
+          else { quizFeedback.textContent = '❌ Raté. }
           quizScoreEl.textContent = String(quizScore);
         });
         quizChoices.appendChild(b);
