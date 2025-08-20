@@ -121,12 +121,12 @@
       
       <div class="row">
         <button class="ghost" data-video="https://www.youtube.com/embed/0Bmhjf0rKe8?si=cat1">clique ici</button>
-        <button class="ghost" data-video="<iframe width="560" height="315" src="https://www.youtube.com/embed/pLCfqRmUQi8?si=roVc559-PdWH6iK8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>Ou ici</button>
-        <button class="ghost" data-video="<iframe width="560" height="315" src="https://www.youtube.com/embed/mjdssddnBXc?si=XlBlwnyGkjpOaINV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>ou ici encore</button>
-        <button class="ghost" data-video="<iframe width="560" height="315" src="https://www.youtube.com/embed/eUUviFnGnBE?si=1lTQGSIGwjR5VAaI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>ou ici encore</button>
-        <button class="ghost" data-video="<iframe width="560" height="315" src="https://www.youtube.com/embed/o3aI7Oo3GMo?si=BxGTPxvJE0JZ5mqS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>ici la musique qui m'a donné envie de jouer du piano</button>
-        <button class="ghost" data-video="<iframe width="560" height="315" src="<iframe width="560" height="315" src="https://www.youtube.com/embed/ZxGiEoczryg?si=1pxPteOXdHGv6Pl5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>tu peux cliquer ici aussi</button>
-        <button class="ghost" data-video="<iframe width="560" height="315" src="https://www.youtube.com/embed/wbV0jUYuG4M?si=pFdL06WJ1qDS7x27" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> et ici aussi</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/pLCfqRmUQi8?si=roVc559-PdWH6iK8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>Ou ici</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/mjdssddnBXc?si=XlBlwnyGkjpOaINV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>ou ici encore</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/eUUviFnGnBE?si=1lTQGSIGwjR5VAaI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>ou ici encore</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/o3aI7Oo3GMo?si=BxGTPxvJE0JZ5mqS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>ici la musique qui m'a donné envie de jouer du piano</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='<iframe width="560" height="315" src="https://www.youtube.com/embed/ZxGiEoczryg?si=1pxPteOXdHGv6Pl5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>tu peux cliquer ici aussi</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/wbV0jUYuG4M?si=pFdL06WJ1qDS7x27" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> et ici aussi</button>
       </div>
       <div id="catVideoContainer" style="margin-top:10px"></div>
     </section>
@@ -158,7 +158,6 @@
       <div class="row" style="justify-content:space-between; align-items:center">
         <h2 style="margin:0"> Mini‑jeu spécialement créé pour toi (5×5)</h2>
         <audio id="jazz" controls loop style="height:34px">
-          <!-- Ajoute ici un petit jazz libre de droit si tu veux (auto‑lecture souvent bloquée) -->
           <source src="jazz.mp3" type="audio/mpeg">
         </audio>
       </div>
@@ -172,9 +171,8 @@
             <button id="newGame" class="ghost">Nouvelle partie</button>
           </div>
           <div class="row" style="margin-top:10px">
-            <input type="file" id="lexFile" accept=".txt">
-            <span class="muted" id="lexInfo">Lexique : intégré (petit). Tu peux charger un fichier texte (un mot par ligne), ou placer <code>mots.txt</code> à côté du HTML.</span>
-          </div>
+            <span class="muted" id="lexInfo">Lexique : intégré (petit). Le fichier <code>mots.txt</code> est chargé automatiquement.</span>
+         </div>
           
         <div>
           <div class="grid" id="grid" aria-label="Grille 5 par 5 (clique une colonne pour faire tomber la lettre)"></div>
@@ -223,7 +221,7 @@
     }, 500);
 
     /* -----------------------------
-       3) VIDEOS DE CHAT – boutons
+       3) Vidéos boutons
     ------------------------------*/
     const catVideoContainer = document.getElementById('catVideoContainer');
     document.querySelectorAll('[data-video]').forEach(btn=>{
@@ -234,7 +232,7 @@
     });
 
     /* -----------------------------
-       4) QUIZ – JSON local (exemples)
+       4) Quiz <33
     ------------------------------*/
     const QUESTIONS = [
       { q:"Combien d'espèces de tortues marines existent ?", choices:["3","5","7","12"], a:2 },
@@ -272,15 +270,12 @@
     drawQuestion();
 
     /* -----------------------------
-       5) MINI‑JEU TETRIS‑SCRABBLE (5×5)
-       – Clique une colonne : la lettre en tête de file y tombe.
-       – Lexique : intégré par défaut, chargeable via fichier texte.
+       5) MINI‑JEU TETRIS‑SCRABBLE
     ------------------------------*/
     const gridEl = document.getElementById('grid');
     const queueEl = document.getElementById('queue');
     const scoreEl = document.getElementById('score');
     const newGameBtn = document.getElementById('newGame');
-    const lexFile = document.getElementById('lexFile');
     const lexInfo = document.getElementById('lexInfo');
 
     const ROWS = 5, COLS = 5;
@@ -325,14 +320,7 @@
   .catch(() => {});
 
 
-    // Import manuel par fichier .txt (1 mot par ligne)
-    lexFile.addEventListener('change', (e)=>{
-      const f = e.target.files && e.target.files[0];
-      if(!f) return;
-      const reader = new FileReader();
-      reader.onload = () => setLexiconFromText(String(reader.result||''));
-      reader.readAsText(f);
-    });
+  
 
     // File d'attente
     let queue = [];
