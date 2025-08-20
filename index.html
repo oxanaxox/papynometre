@@ -172,7 +172,7 @@
             <button id="newGame" class="ghost">Nouvelle partie</button>
           </div>
           <div class="row" style="margin-top:10px">
-            <span class="muted" id="lexInfo">Lexique : intégré (petit). Le fichier <code>mots.txt</code> est chargé automatiquement.</span>
+            <span class="muted" id="lexInfo">Lexique : intégré (petit). Le fichier <code>mots.txt</code> est chargé automatiquement.</span> </div>
          </div>
           
         <div>
@@ -184,7 +184,7 @@
   </main>
 
   <footer class="wrap" style="margin-bottom:40px; color:#6b7280">
-    Fait en Août 2
+    
   </footer>
 
   <script>
@@ -267,7 +267,7 @@ document.querySelectorAll('[data-video]').forEach(btn => {
         b.textContent = c;
         b.addEventListener('click', ()=>{
           if(i === item.a){ quizFeedback.textContent = '✅ Bravo !'; quizScore++; }
-          else { quizFeedback.textContent = '❌ Raté.' }
+          else { quizFeedback.textContent = '❌ Raté.'; }
           quizScoreEl.textContent = String(quizScore);
         });
         quizChoices.appendChild(b);
