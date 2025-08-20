@@ -111,7 +111,7 @@
   <div class="duck-pop" id="duckPop" aria-hidden="true">
     <div class="duck" aria-label="Canard">🦆</div>
     <audio id="coinAudio">
-      <!-- <source src="duck-quacking-37392.mp3" type="audio/mpeg" /> -->
+      <source src="duck-quacking-37392.mp3" type="audio/mpeg"> 
     </audio>
   </div>
 
@@ -171,7 +171,7 @@
         <h2 style="margin:0">🔤 Mini‑jeu : Tetris‑Scrabble (5×5)</h2>
         <audio id="jazz" controls loop style="height:34px">
           <!-- Ajoute ici un petit jazz libre de droit si tu veux (auto‑lecture souvent bloquée) -->
-          <!-- <source src="jazz.mp3" type="audio/mpeg" /> -->
+          <source src="jazz.mp3" type="audio/mpeg">
         </audio>
       </div>
 
@@ -209,7 +209,7 @@
     const stripAccents = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     /* -----------------------------
-       1) BOUTON TOURNEVIS → CANARD "COIN COIN"
+       1) CANARD "COIN COIN"
     ------------------------------*/
     const duckBtn = document.getElementById('duckBtn');
     const duckPop = document.getElementById('duckPop');
