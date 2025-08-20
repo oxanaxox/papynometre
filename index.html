@@ -10,7 +10,7 @@
       --muted:#c34aff;       
       --brand:#2563eb;        
       --accent:#ff7eee;      
-      --card:#eedcfd;         
+      --card:#ffd5fc;         
       --border:#7b4949;  
     }
 
@@ -19,10 +19,10 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background-image: url("décor piscine.jpg"), url("décor piscine.jpg");
+      background-image: url("décor piscine.jpg");
       background-size: cover;      
       background-repeat: no-repeat;
-      background-position: left top, right bottom;
+      background-position: center;
       color:var(--ink);
       line-height:1.5;
     }
@@ -73,7 +73,6 @@
 
     /* Mini-jeu Tetris-Scrabble */
     .game-wrap{ display:grid; grid-template-columns: auto 1fr; gap:16px; align-items:start; min-width: 0; }
-    .next { min-width: 0; }
     .grid{ display:grid; grid-template-columns: repeat(5, 56px); grid-auto-rows:56px; gap:6px; background:#f1f5f9; padding:10px; border-radius:16px; border:1px solid var(--border);width: fit-content; max-width: 100%; margin-right: auto; }
     .cell{ display:grid; place-items:center; font-weight:800; font-size:24px; border-radius:12px; background:#ffffff; border:1px solid var(--border); box-shadow: inset 0 -2px #00000010; user-select:none }
     .cell.empty{ background:#f8fafc; color:#cbd5e1; border-style:dashed }
@@ -121,19 +120,18 @@
     </section>
 
     <section class="card">
-  <div class="row">
-    <button class="ghost" data-video="https://www.youtube.com/embed/0Bmhjf0rKe8?si=cat1">clique ici</button>
-    <button class="ghost" data-video="https://www.youtube.com/embed/wbV0jUYuG4M?si=pFdL06WJ1qDS7x27">Ou ici</button>
-    <button class="ghost" data-video="https://www.youtube.com/embed/mjdssddnBXc?si=XlBlwnyGkjpOaINV">ou ici encore</button>
-    <button class="ghost" data-video="https://www.youtube.com/embed/eUUviFnGnBE?si=1lTQGSIGwjR5VAaI">ou ici encore</button>
-    <button class="ghost" data-video="https://www.youtube.com/embed/o3aI7Oo3GMo?si=BxGTPxvJE0JZ5mqS">ici la musique qui m'a donné envie de jouer du piano</button>
-    <button class="ghost" data-video="https://www.youtube.com/embed/ZxGiEoczryg?si=1pxPteOXdHGv6Pl5">tu peux cliquer ici aussi</button>
-    <button class="ghost" data-video="https://www.youtube.com/embed/pLCfqRmUQi8?si=roVc559-PdWH6iK8">et ici aussi</button>
-  </div>
-
-  <div id="catVideoContainer" style="margin-top:10px"></div>
-</section>
-
+      
+      <div class="row">
+        <button class="ghost" data-video="https://www.youtube.com/embed/0Bmhjf0rKe8?si=cat1">clique ici</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/pLCfqRmUQi8?si=roVc559-PdWH6iK8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>Ou ici</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/mjdssddnBXc?si=XlBlwnyGkjpOaINV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>ou ici encore</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/eUUviFnGnBE?si=1lTQGSIGwjR5VAaI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>ou ici encore</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/o3aI7Oo3GMo?si=BxGTPxvJE0JZ5mqS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin' allowfullscreen></iframe>ici la musique qui m'a donné envie de jouer du piano</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='<iframe width="560" height="315" src="https://www.youtube.com/embed/ZxGiEoczryg?si=1pxPteOXdHGv6Pl5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>tu peux cliquer ici aussi</button>
+        <button class="ghost" data-video="<iframe width="560" height="315" src='https://www.youtube.com/embed/wbV0jUYuG4M?si=pFdL06WJ1qDS7x27" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> et ici aussi</button>
+      </div>
+      <div id="catVideoContainer" style="margin-top:10px"></div>
+    </section>
 
     <section class="card">
       <h2>liens vers des jeux de géographie</h2>
@@ -180,14 +178,14 @@
           
         <div>
           <div class="grid" id="grid" aria-label="Grille 5 par 5 (clique une colonne pour faire tomber la lettre)"></div>
-          <p class="muted"> Le but du jeu est de faire des mots, les lettres arrivent par la gauche. Il suffit de cliquer sur une colonne pour qu'une lettre tombe dedans! Bisous</p>
+          <p class="muted"> Le but du jeu est de faire des mots, les lettres arrivent par la gauche. Il suffit de cliquer sur une colonne pour qu'une lettre tombe dedans ! Bisous</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="wrap" style="margin-bottom:40px; color:#6b7280">
-    Fait pour l'anniversaire de papy joyeux anniv papy
+    Fait en Août 2
   </footer>
 
   <script>
@@ -228,31 +226,23 @@
        3) Vidéos boutons
     ------------------------------*/
     const catVideoContainer = document.getElementById('catVideoContainer');
-
-document.querySelectorAll('[data-video]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const url = btn.getAttribute('data-video');
-    catVideoContainer.innerHTML = `
-      <iframe width="560" height="315" src="${url}" 
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>`;
-  });
-});
+    document.querySelectorAll('[data-video]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const url = btn.getAttribute('data-video');
+        catVideoContainer.innerHTML = `<iframe src="${url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      });
+    });
 
     /* -----------------------------
-       4) Quiz <3
+       4) Quiz <33
     ------------------------------*/
     const QUESTIONS = [
       { q:"Combien d'espèces de tortues marines existent ?", choices:["3","5","7","12"], a:2 },
-      { q:"L'année de l'invention du photomaton", choices:["1925","1956","1955","1804"], a:0 },
+      { q:"L'année de la prise de la Bastille ?", choices:["1789","1792","1776","1804"], a:0 },
       { q:"Le mot ‘OX’ est-il valide au Scrabble (FR) ?", choices:["Oui","Non"], a:1 },
-      { q:"De quoi a-t-on peur d’être séparé lorsque l’on est nomophobe ?", choices:["Son nom","son téléphone portable","Ses poissons","Ses habitudes"], a:1 },
+      { q:"Quelle est la capitale de la Suisse ?", choices:["Zurich","Genève","Berne","Bâle"], a:2 },
       { q:"Une tortue est un…", choices:["Amphibien","Reptile","Mammifère","Poisson"], a:1 },
       { q:"Dans ‘Des chiffres et des lettres’, la partie lettres vise à…", choices:["Former le plus long mot","Deviner un nombre secret","Trouver des rimes"], a:0 },
-      { q:"Quel est le plat préféré de Nany ?", choices:["Le Homard grillé","Le pot-au-feu","ça dépend du lieu où elle est",], a:2 },
-      { q:"Une tortue est un…", choices:["Amphibien","Reptile","Mammifère","Poisson"], a:1 },
     ];
     let quizIndex = -1, quizScore = 0;
     const quizQ = document.getElementById('quizQ');
