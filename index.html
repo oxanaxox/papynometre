@@ -79,7 +79,7 @@
     .queue .tile{ width:40px; height:40px; display:grid; place-items:center; font-weight:900; border-radius:10px; border:1px solid var(--border); background:#fff }
     .score{ font-size: 2rem; font-weight:700 }
     .flash{ animation: flash 1.7s ease } @keyframes flash{ 50%{ background:#ff5a5a } }
-    .flashcorrect{ animation: flashcorrect 2s ease } @keyframes flashcorrect{ 50%{ background:#a1f69b } 
+    .flashcorrect{ animation: flashcorrect 2s ease } @keyframes flashcorrect{ 50%{ background:#a1f69b } } 
                                                                              
   </style>
 </head>
@@ -267,7 +267,7 @@ document.querySelectorAll('[data-video]').forEach(btn => {
         b.textContent = c;
         b.addEventListener('click', ()=>{
           if(i === item.a){ quizFeedback.textContent = '✅ Bravo !'; quizScore++; }
-          else { quizFeedback.textContent = '❌ Raté. }
+          else { quizFeedback.textContent = '❌ Raté.' }
           quizScoreEl.textContent = String(quizScore);
         });
         quizChoices.appendChild(b);
